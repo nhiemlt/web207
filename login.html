@@ -27,7 +27,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <!--CSS-->
-  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="login.css" />
 </head>
 
 <body ng-app="login">
@@ -94,7 +94,7 @@
   <div class="container-fluid" ng-controller="login-ctrl">
     <div class="row" id="signin-form">
       <form class="col-sm-3" id="form">
-        <img src="images/logo.png" alt="">
+        <img src="TaiNguyen/images/logo.png" alt="">
         <br>
         <h3><b>{{title}}</b></h3>
         <h6>{{content}}</h6>
@@ -166,7 +166,7 @@
         $scope.email = '';
         $scope.password = '';
         $("#banner").animate({ left: "0px" }, "slow");
-        $("#banner").css({ transform: "scaleX(-1)", backgroundImage: "url('images/login-banner2.png')" });
+        $("#banner").css({ transform: "scaleX(-1)", backgroundImage: "url('TaiNguyen/images/login-banner2.png')" });
         $("#form").animate({ left: "60vw" }, "slow");
         $(".form-input").animate({ height: "9vh" }, "liner");
         $(".form-group>button").animate({ top: "-3.3vw" }, "liner");
@@ -184,7 +184,7 @@
         $scope.email = '';
         $scope.password = '';
         $("#banner").animate({ left: "25vw" }, "slow");
-        $("#banner").css({ transform: "scaleX(1)", backgroundImage: "url('images/login-banner.png')" });
+        $("#banner").css({ transform: "scaleX(1)", backgroundImage: "url('TaiNguyen/images/login-banner.png')" });
         $("#form").animate({ left: "10vw" }, "slow");
         $(".form-input").animate({ height: "8vh" }, "liner");
         $(".form-group>button").animate({ top: "-2.7vw" }, "liner");
