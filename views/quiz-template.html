@@ -1,0 +1,84 @@
+<div class="container d-flex align-content-center p-5" style="height: 100vh">
+    <div class="card m-auto w-100">
+        <div class="card-header text-bg-primary">
+            <div class="row">
+                <h1 class="col-7">{{quiz.id}}</h1>
+                <h3 class="col-5 m-auto d-flex flex-row-reverse">
+                    <img src="https://i.gifer.com/XVo6.gif" class="col-1" ng-if="time==true">
+                    {{ minutes }}:{{ seconds < 10 ? '0' : '' }}{{seconds}} </h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- <div class="row p-3 pb-0" ng-if="">
+                <strong class="col-md-6"> Aswes 1/10</strong>
+                <strong class="col-md-6 d-flex flex-row-reverse"> Mask 0/10</strong>
+            </div> -->
+            <div class="row p-3">
+                <h2>Question {{key+1}}: </h2>
+                <h3>{{question.Text}}</h3>
+                <div class="form-check" ng-repeat="asw in question.Answers">
+                    <input class="form-check-input" type="radio" name="{{question.id}}" 
+                    value="{{question.id}}-{{asw.id}}" ng-change="handInputChange(value)" ng-model="value"/>
+                    <label class="form-check-label"> {{asw.Text}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn {{preButton}}" ng-click="pre()">
+                        Previous
+                    </button>
+                    <button type="button" class="btn {{nextButton}}" ng-click="next()">
+                        Next
+                    </button>
+                </div>
+                <div class="col-md-6 d-flex flex-row-reverse">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    ng-click="handleSubmit()" >
+                        Submit
+                    </button>
+                </div>
+            </div>
+            <!-- Modal 1-->
+            <div class="modal fade" id="exampleModal"  tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation notice !</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to submit?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#finishModal" ng-click="stopCountdown()">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal 2-->
+            <div class="modal fade" id="finishModal"  data-bs-backdrop="false" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-top">
+                    <div class="modal-content">
+                        <div class="row text-center mt-3">
+                            <h1 class="text-success display-1 fa-regular fa-circle-check"></h1>
+                        </div>
+                        <div class="modal-body row p-3 text-center">
+                            <h3>You have completed the test</h3>
+                            <h5>This is your result</h5>
+                            <strong class="col-6">Mask: {{result}}</strong>
+                            <strong class="col-6">Time: {{minutes}}:{{seconds}}</strong>
+                        </div>
+                        <div class="modal-footer text-center">
+                            <a type="button" class="btn btn-primary" href="#!/course">Finish</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

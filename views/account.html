@@ -1,0 +1,45 @@
+<div class="py-5">
+    <div class="container px-5">
+        <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+            <div class="text-center mb-5 ">
+                <image type="file" src="/images/account.png" class="img-fluid col-2 rounded-circle border border-primary">
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <form id="contactForm" name="frmAccount">
+                        <div class="form-floating mb-3">
+                            <input class="form-control " id="username" type="text" ng-model="user.username" readonly/>
+                            <label for="email">Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" name="frmAccount.fullname" type="text" ng-model="user.fullname"
+                                required />
+                            <label for="name">Full name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="email" ng-model="user.email"
+                                name="frmAccount.email" required />
+                            <label for="email">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="birthday" type="date" ng-model="birthday"
+                            name="frmAccount.birthday" />
+                            <label for="birthday">Birthday</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="gender" ng-model="user.gender" name="frmAccount.gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            <label for="gender">Gender</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary w-50 mt-5 m-auto" ng-show="frmAccount.$invalid">Update account</button>
+                            <button type="submit" class="btn btn-primary w-50 mt-5 m-auto" ng-show="frmAccount.$valid" ng-click="updateAccount()">Update account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

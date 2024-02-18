@@ -11,9 +11,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
-  <!--AngularJS-->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
   <!--Font Awesome Icons-->
   <script src="https://kit.fontawesome.com/a055717105.js" crossorigin="anonymous"></script>
 
@@ -27,110 +24,46 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <!--CSS-->
-  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="css/login.css" />
 </head>
 
 <body ng-app="login">
 
-  <div class="modal fade" id="model" aria-hidden="true" aria-labelledby="modelLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modelLabel">Please enter your email to recieve code!</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <input class="form-control" id="email" type="email" placeholder="name@example.com" />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#model2" data-bs-toggle="modal"
-            data-bs-dismiss="modal">Send code</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="model2" aria-hidden="true" aria-labelledby="modelLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modelLabel2">
-            Enter the security code !</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <input class="form-control" id="code" type="text" placeholder="Security code" />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#model3" data-bs-toggle="modal" data-bs-dismiss="modal">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="modal fade" id="model3" aria-hidden="true" aria-labelledby="modelLabel3" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modelLabel3">
-            Change your password !</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <input class="form-control" id="password" type="password" placeholder="Password" />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <a class="btn btn-primary" href="login.html">Submit</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="container-fluid" ng-controller="login-ctrl">
     <div class="row" id="signin-form">
-      <form class="col-sm-3" id="form">
-        <img src="TaiNguyen/images/logo.png" alt="">
+      <form class="col-sm-3" id="form" name="frmLogin">
+        <img src="images/logo.png" alt="">
         <br>
         <h3><b>{{title}}</b></h3>
         <h6>{{content}}</h6>
         <div class="form-group" id="form-username">
           <label class="form-label">Username</label>
-          <input type="text" id="txtUsername" class="form-input" ng-model="username"
-            placeholder="Input your username" />
-          <small></small>
+          <input type="text" id="txtUsername" class="form-input" ng-model="username" name="username"
+            placeholder="Input your username" required />
         </div>
         <div class="form-group" id="form-email" ng-show="bl">
           <label class="form-label">Email</label>
-          <input type="email" id="txtEmail" class="form-input" ng-model="email" placeholder="Input your Email" />
-          <small></small>
+          <input type="email" id="txtEmail" class="form-input" ng-model="email" placeholder="Input your Email"
+            name="email"/>
         </div>
         <div class="form-group" id="form-password">
           <label class="form-label">Password</label>
-          <input type="password" id="txtPassword" class="form-input" ng-model="password"
-            placeholder="Input your password" />
-          <button type="button" class="fa-regular fa-eye"></button>
+          <input type="{{status.type}}" id="txtPassword" class="form-input" ng-model="password"
+            placeholder="Input your password " name="password" required />
+          <button type="button" class="{{status.icon}}" ng-click="changeEye()"></button>
           <small></small>
-          <div class="form-check" ng-hide="bl">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label">Remember password ?</label>
-          </div>
         </div>
-        <button type="button" class="btn btn-primary rounded-pill" id="btnLogin" ng-click="changeTab()">
+        <button type="submit" class="btn btn-secondary rounded-pill" id="btnLogin" 
+          ng-click="handleForm()">
           {{buttonName}}
         </button>
-        <p ng-show="bl">Already have an account? <strong ng-click="loginForm()" id="login"
-            style="cursor: pointer;">Login</strong>
-        </p>
-        <p ng-hide="bl">Don't have an account? <strong ng-click="signinForm()" style="cursor: pointer;">Sign up</strong>
-          <br>
-          <strong style="cursor: pointer; font-size: 1.5vh;" id="forget" data-bs-toggle="modal" href="#model"
-            role="button">Forget password?</strong>
-        </p>
+          <p ng-show="bl">Already have an account? <strong ng-click="loginForm()" id="login"
+              style="cursor: pointer;">Login</strong>
+          </p>
+          <p ng-hide="bl">Don't have an account? <strong ng-click="signinForm()" style="cursor: pointer;">Sign
+              up</strong>
+            <br>
+          </p>
 
       </form>
       <div class="col-sm-9" id="banner">
@@ -139,60 +72,11 @@
     </div>
   </div>
 
+
+  <script src="js/login.js"></script>
+
   <script>
-    var app = angular.module('login', []);
 
-    app.controller('login-ctrl', function ($scope) {
-      $scope.bl = false;
-      $scope.buttonName = 'Log in';
-      $scope.title = "WELCOME TO THE FOXY";
-      $scope.content = "Login now !";
-
-
-      $scope.changeTab = function () {
-        if ($scope.bl) {
-          window.location.href = "account.html";
-        } else {
-          window.location.href = "index.html";
-        }
-      };
-
-      $scope.loginForm = function () {
-        $scope.bl = false;
-        $scope.buttonName = 'Log in';
-        $scope.title = "WELCOME TO WEBSITE";
-        $scope.content = "Login now !";
-        $scope.username = '';
-        $scope.email = '';
-        $scope.password = '';
-        $("#banner").animate({ left: "0px" }, "slow");
-        $("#banner").css({ transform: "scaleX(-1)", backgroundImage: "url('TaiNguyen/images/login-banner2.png')" });
-        $("#form").animate({ left: "60vw" }, "slow");
-        $(".form-input").animate({ height: "9vh" }, "liner");
-        $(".form-group>button").animate({ top: "-3.3vw" }, "liner");
-        $("#form").css({ boxShadow: "-3vh 3vh 3vh rgba(0, 0, 0, 0.322)" });
-        $("#form-username").animate({ top: "1.5vw" }, "liner");
-        $("#form-password").animate({ top: "8vw" }, "liner");
-      };
-
-      $scope.signinForm = function () {
-        $scope.bl = true;
-        $scope.buttonName = 'Sign up';
-        $scope.title = "CREATE AN ACCOUNT";
-        $scope.content = "Let's get started !";
-        $scope.username = '';
-        $scope.email = '';
-        $scope.password = '';
-        $("#banner").animate({ left: "25vw" }, "slow");
-        $("#banner").css({ transform: "scaleX(1)", backgroundImage: "url('TaiNguyen/images/login-banner.png')" });
-        $("#form").animate({ left: "10vw" }, "slow");
-        $(".form-input").animate({ height: "8vh" }, "liner");
-        $(".form-group>button").animate({ top: "-2.7vw" }, "liner");
-        $("#form").css({ boxShadow: "3vh 3vh 3vh rgba(0, 0, 0, 0.322)" });
-        $("#form-username").animate({ top: "1vw" }, "liner");
-        $("#form-password").animate({ top: "11vw" }, "liner");
-      };
-    });
   </script>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
